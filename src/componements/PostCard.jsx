@@ -1,12 +1,13 @@
 import React from "react";
+import makeDateReadable from "../utils/date";
 
-function PostCard() {
+function PostCard({ title, description, createdAt }) {
   return (
     <>
-      <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div className="max-w-2xl px-8 my-12 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <div className="flex items-center justify-between">
           <span className="text-sm font-light text-gray-600 dark:text-gray-400">
-            Mar 10, 2019
+            {makeDateReadable(createdAt)}
           </span>
           <a
             className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
@@ -24,14 +25,9 @@ function PostCard() {
             tabIndex="0"
             role="link"
           >
-            Accessibility tools for designers and developers
+            {title}
           </a>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-            expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos
-            enim reprehenderit nisi, accusamus delectus nihil quis facere in
-            modi ratione libero!
-          </p>
+          <p className="mt-2 text-gray-600 dark:text-gray-300">{description}</p>
         </div>
 
         <div className="flex items-center justify-between mt-4">
@@ -55,7 +51,7 @@ function PostCard() {
               tabIndex="0"
               role="link"
             >
-              Khatab wedaa
+              Hamza Jomaa
             </a>
           </div>
         </div>
