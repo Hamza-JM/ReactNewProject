@@ -1,38 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { axiosInstance } from "../utils/axios";
 
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  const response = await axiosInstance.get("posts/all");
+  console.log(response.data);
+  return response.data.docs;
+});
 const initialState = {
-  posts: [
-    {
-      title: "First post",
-      content: "First post content",
-      description: "First post description",
-      published: true,
-    },
-    {
-      title: "Second post",
-      content: "Second post content",
-      description: "Second post description",
-      published: false,
-    },
-    {
-      title: "Third post",
-      content: "Third post content",
-      description: "Third post description",
-      published: true,
-    },
-    {
-      title: "Fourth post",
-      content: "Fourth post content",
-      description: "Fourth post description",
-      published: false,
-    },
-  ],
+  posts: [],
 };
 
 export const counterSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {},
+  extraReducers(builder) {
+    builder.addCase(fetchPosts.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.posts = action.payload;
+    });
+  },
 });
 
 export const {} = counterSlice.actions;

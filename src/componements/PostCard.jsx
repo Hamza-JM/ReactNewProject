@@ -1,7 +1,23 @@
 import React from "react";
 import makeDateReadable from "../utils/date";
+import { useNavigate } from "react-router-dom";
 
-function PostCard({ title, description, createdAt }) {
+function PostCard({ title, description, createdAt, id }) {
+  const navigate = useNavigate();
+  function handelNavigate() {
+    navigate(`/${id}`, {
+      state: {
+        title: title,
+        description: description,
+        createdAt: createdAt,
+        id: id,
+      },
+    });
+  }
+  function handelNavigateToCreatePage() {
+    navigate("/create");
+  }
+
   return (
     <>
       <div className="max-w-2xl px-8 my-12 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -13,8 +29,9 @@ function PostCard({ title, description, createdAt }) {
             className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
             tabIndex="0"
             role="button"
+            onClick={handelNavigateToCreatePage}
           >
-            Design
+            Try to Create
           </a>
         </div>
 
@@ -36,6 +53,7 @@ function PostCard({ title, description, createdAt }) {
             className="text-blue-600 dark:text-blue-400 hover:underline"
             tabIndex="0"
             role="link"
+            onClick={handelNavigate}
           >
             Read more
           </a>

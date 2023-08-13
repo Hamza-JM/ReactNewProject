@@ -1,19 +1,25 @@
 import React from "react";
 import PostCard from "../../componements/PostCard";
+import { fetchPosts } from "../../store/postSLice";
 
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 function index() {
   const { posts } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
   return (
     <div className="flex-grow">
       {posts.map((post) => {
         return (
           <PostCard
-            key={post.title}
+            key={post._id}
             title={post.title}
             description={post.description}
-            createdAt="8/12/2023"
+            createdAt={post.createdAt}
+            id={post.id}
           />
         );
       })}

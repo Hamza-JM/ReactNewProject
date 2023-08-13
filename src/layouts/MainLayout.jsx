@@ -14,6 +14,7 @@ function MainLayout({ children }) {
           </h1>
           <div className="flex gap-10">
             {children}
+
             <Sidebar />
           </div>
           <div className="mt-12"></div>
